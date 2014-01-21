@@ -42,9 +42,7 @@ parser.add_argument('--file', '-f',
     type=argparse.FileType('rb'),
     default=sys.stdin)
 
-print (sys.argv)
-args = parser.parse_args(sys.argv)
-print dir(args)
+args = parser.parse_args(sys.argv[1:])
 
 
 s = args.in_file.read()
