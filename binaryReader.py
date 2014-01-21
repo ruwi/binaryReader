@@ -65,24 +65,23 @@ parser.add_argument('--file', '-f',
     type=argparse.FileType('rb'),
     default=sys.stdin)
 
-args = parser.parse_args(sys.argv[1:])
-
-
-s = args.in_file.read()
-if args.info:
-    args.out_file.write(info(s))
-if args.pprint:
-    if args.view_type == 'hex':
-        args.out_file.write(tohex_pprint(s))
-    elif args.view_type == 'dots':
-        args.out_file.write(todots_pprint(s))
-else:
-    if args.view_type == 'hex':
-        args.out_file.write(tohex(s))
-    elif args.view_type == 'dots':
-        args.out_file.write(todots(s))
+if __name__ == '__main__':
+    args = parser.parse_args(sys.argv[1:])
+    s = args.in_file.read()
+    if args.info:
+        args.out_file.write(info(s))
+    if args.pprint:
+        if args.view_type == 'hex':
+            args.out_file.write(tohex_pprint(s))
+        elif args.view_type == 'dots':
+            args.out_file.write(todots_pprint(s))
     else:
-        args.out_file.write(s)
+        if args.view_type == 'hex':
+            args.out_file.write(tohex(s))
+        elif args.view_type == 'dots':
+            args.out_file.write(todots(s))
+        else:
+            args.out_file.write(s)
     
 
 
